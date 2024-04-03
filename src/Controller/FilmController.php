@@ -24,4 +24,18 @@ class FilmController extends AbstractController
             'films' => $films,
         ]);
     }
+
+    #[Route('/film/{id}', name: 'app_film_details')]
+    public function detailsFilm(ApiPosts $apiPosts, FormateHeure $formateHeure, int $id): Response
+    {
+        // Liste le details d'un film
+        $film = $apiPosts->detailsFilm($id);
+        // Modifie le format de la duree
+        $film = $formateHeure->formateHeureTableau($film);
+        $film = $formateHeure->formateDateTableau($film);
+
+        return $this->render('film/details_film.html.twig', [
+            'film' => $film,
+        ]);
+    }
 }

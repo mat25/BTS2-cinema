@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Details film{% endblock %}
+
+{% block body %}
+
+    <div class="mt-3 ml-3">
+        <a href="http://localhost:8001/films" class="btn btn-primary">Retour</a>
+    </div>
+
+    {% for detailsFilm in film %}
+
+        <h1 class="text-center my-4">{{ detailsFilm.titre }}</h1>
+
+        <p>Id : {{ detailsFilm.id }}</p>
+        <p>Duree : {{ detailsFilm.duree }}</p>
+
+        <h2>Prochaine séance(s)</h2>
+        {% for seance in detailsFilm.seances %}
+
+            <p>Le {{ seance.dateProjection }}</p>
+
+        {% endfor %}
+    {% endfor %}
+
+{% endblock %}

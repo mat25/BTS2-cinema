@@ -33,4 +33,20 @@ class FormateHeure
 
         return $resultat;
     }
+
+
+    public function formateDateTableau(array $films) : array {
+        foreach ($films as $key => $film){
+            foreach ($film["seances"] as $cle => $seance){
+                $films[$key]['seances'][$cle]['dateProjection'] = $this->formateDate($seance['dateProjection']);
+            }
+        }
+        return $films;
+    }
+    public function formateDate(string $date) : string {
+        $dateTime = \DateTime::createFromFormat("Y-m-d\TH:i:sP",$date);
+        $date = $dateTime->format("d/m/y à H\hi");
+        return $date;
+    }
+
 }

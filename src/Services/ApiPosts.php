@@ -25,8 +25,19 @@ class ApiPosts
         );
 
         $films = $responseAPI->toArray();
-
         return $films;
 
+    }
+
+    public function detailsFilm($id) : array {
+
+        // On fais appel au endpoint 127.0.0.1:8000/api/film/{id}
+        $responseAPI = $this->httpClient->request(
+            'GET',
+            'http://172.16.204.126:8000/api/film/'.$id
+        );
+
+        $films = $responseAPI->toArray();
+        return $films;
     }
 }
