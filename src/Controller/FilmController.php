@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Services\ApiPosts;
+use App\Services\ApiFilm;
 use App\Services\FormateHeure;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,10 +12,10 @@ class FilmController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
     #[Route('/films', name: 'app_film')]
-    public function index(ApiPosts $apiPosts, FormateHeure $formateHeure): Response
+    public function index(ApiFilm $apiFilm, FormateHeure $formateHeure): Response
     {
         // Liste les films
-        $films = $apiPosts->listerLesFilms();
+        $films = $apiFilm->listerLesFilms();
 
         // Modifie le format de la duree
         $films = $formateHeure->formateHeureTableau($films);
@@ -26,10 +26,10 @@ class FilmController extends AbstractController
     }
 
     #[Route('/film/{id}', name: 'app_film_details')]
-    public function detailsFilm(ApiPosts $apiPosts, FormateHeure $formateHeure, int $id): Response
+    public function detailsFilm(ApiFilm $apiFilm, FormateHeure $formateHeure, int $id): Response
     {
         // Liste le details d'un film
-        $film = $apiPosts->detailsFilm($id);
+        $film = $apiFilm->detailsFilm($id);
         // Modifie le format de la duree
         $film = $formateHeure->formateHeureTableau($film);
         $film = $formateHeure->formateDateTableau($film);

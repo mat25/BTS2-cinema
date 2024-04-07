@@ -18,9 +18,10 @@
                         </svg>
                         {{ film.duree }}
                     </p>
-                    <a href="http://localhost:8001/film/{{ film.id }}" class="btn btn-primary ">Détails</a>
+                    <a href="{{ path('app_film_details',{'id' : film.id }) }}" class="btn btn-primary ">Détails</a>
                 </div>
             </div>
+
         {% endfor %}
     </div>
 

@@ -4,7 +4,7 @@ namespace App\Services;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class ApiPosts
+class ApiFilm
 {
     private HttpClientInterface $httpClient;
 
@@ -21,7 +21,7 @@ class ApiPosts
         // On fais appel au endpoint 127.0.0.1:8000/api/posts
         $responseAPI = $this->httpClient->request(
             'GET',
-            'http://172.16.204.126:8000/api/listerFilms'
+            'http://'.$_ENV["ADRESSE_IP_LOCAL"].':8000/api/listerFilms'
         );
 
         $films = $responseAPI->toArray();
@@ -34,7 +34,7 @@ class ApiPosts
         // On fais appel au endpoint 127.0.0.1:8000/api/film/{id}
         $responseAPI = $this->httpClient->request(
             'GET',
-            'http://172.16.204.126:8000/api/film/'.$id
+            'http://'.$_ENV["ADRESSE_IP_LOCAL"].':8000/api/film/'.$id
         );
 
         $films = $responseAPI->toArray();
