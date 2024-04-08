@@ -32,15 +32,13 @@ class UserController extends AbstractController
             if (!isset($response["erreur"])) {
                 return $this->redirectToRoute('app_home');
             } else {
-                // $form->addError(new FormError($response["erreur"]));
-                $erreur = $response["erreur"];
+                $form->get('email')->addError(new FormError($response["erreur"]));
             }
         }
 
         // Si il y a des erreur on renvoie l'erreur'
         return $this->render('user/inscription.html.twig', [
-            'erreur' => $erreur,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 }

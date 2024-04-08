@@ -34,7 +34,6 @@ class ApiUser
         } catch (ClientExceptionInterface $exception) {
             $statusCode = $exception->getResponse()->getStatusCode();
             $messageErreur = $exception->getResponse()->getContent(false);
-
             return ['erreur' => $messageErreur,'code' => $statusCode];
         }
     }

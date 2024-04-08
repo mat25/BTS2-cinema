@@ -5,14 +5,13 @@
 {% block body %}
     <h1 class="text-center my-4">Inscription</h1>
 
-    {{ dump(erreur) }}
 
     {{ form_start(form) }}
     {{ form_row(form.email) }}
     {{ form_row(form.password) }}
-    {% if erreur != "" %}
-        <p>{{ erreur }}</p>
-    {% endif %}
+{#    {% if erreur != "" %}#}
+{#        <p>{{ erreur }}</p>#}
+{#    {% endif %}#}
     <button type="submit">S'inscrire</button>
     {{ form_end(form) }}
 

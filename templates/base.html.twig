@@ -15,12 +15,11 @@
     </head>
     <body>
 
+        {% include 'navbar.html.twig' %}
+
         <div class="content mx-auto" style="width: 95%">
             {% block body %}{% endblock %}
         </div>
 
-        {% include 'navbar.html.twig' %}
-
-        {% block body %}{% endblock %}
     </body>
 </html>
