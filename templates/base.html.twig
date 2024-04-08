@@ -14,8 +14,13 @@
         {% endblock %}
     </head>
     <body>
+
         <div class="content mx-auto" style="width: 95%">
             {% block body %}{% endblock %}
         </div>
+
+        {% include 'navbar.html.twig' %}
+
+        {% block body %}{% endblock %}
     </body>
 </html>
