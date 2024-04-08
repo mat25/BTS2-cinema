@@ -9,15 +9,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
     #[Route('/inscription', name: 'app_inscription')]
-    public function inscription(ApiUser $apiUser,Request $request): Response
+    public function inscription(ApiUser $apiUser,Request $request,SessionInterface $session): Response
     {
-        $response = "";
-        $erreur = "";
+
         $form = $this->createForm(InscriptionFormType::class);
 
         // Gérer la soumission du formulaire
@@ -30,9 +30,11 @@ class UserController extends AbstractController
             $password = $donnees["password"];
             $response = $apiUser->inscription($email,$password);
             if (!isset($response["erreur"])) {
+                // Message flash
+                $session->getFlashBag()->add('success', 'Votre compte a bien été créer !');
                 return $this->redirectToRoute('app_home');
             } else {
-                $form->get('email')->addError(new FormError($response["erreur"]));
+                $form->addError(new FormError($response["erreur"]));
             }
         }
 

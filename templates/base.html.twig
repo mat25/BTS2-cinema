@@ -17,6 +17,12 @@
 
         {% include 'navbar.html.twig' %}
 
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
         <div class="content mx-auto" style="width: 95%">
             {% block body %}{% endblock %}
         </div>
