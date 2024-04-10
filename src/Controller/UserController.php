@@ -28,7 +28,12 @@ class UserController extends AbstractController
 
             $email = $donnees["email"];
             $password = $donnees["password"];
-            $response = $apiUser->inscription($email,$password);
+            $confirmPassword = $donnees["confirmPassword"];
+            if ($password == $confirmPassword) {
+                $response = $apiUser->inscription($email,$password);
+            } else {
+                $response["erreur"] = "Les mots de passe ne sont pas identique !";
+            }
             if (!isset($response["erreur"])) {
                 // Message flash
                 $session->getFlashBag()->add('success', 'Votre compte a bien été créer !');

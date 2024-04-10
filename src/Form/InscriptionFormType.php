@@ -18,6 +18,9 @@ class InscriptionFormType extends AbstractType
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'Mot de passe',
+            ])
+            ->add('confirmPassword', PasswordType::class, [
+            'label' => 'Confirmation de mot de passe',
             ]);
     }
 

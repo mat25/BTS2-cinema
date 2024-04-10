@@ -4,9 +4,6 @@
 
 {% block body %}
 
-    <div class="mt-3 ml-3">
-        <a href="{{ path('app_film') }}" class="btn btn-primary">Retour</a>
-    </div>
 
     {% for detailsFilm in film %}
         <div class="details text-center">
@@ -23,6 +20,9 @@
                 <div class="seance mt-4">
                     <p><b>Le</b> {{ seance.dateProjection }} </p>
                     <p><b>Tarif</b> : {{ seance.tarifNormal }} €</p>
+
+                    <p><b>Salle</b> : {{ seance.Salle.nomSalle}}</p>
+                    <p><b>Nombre de place</b> : {{ seance.Salle.nbPlace}}</p>
 
                     {# Que si connecter #}
                     <a href="" class="btn btn-primary">Reserver</a>

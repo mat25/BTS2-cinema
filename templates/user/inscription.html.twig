@@ -17,9 +17,26 @@
 
         <div class="my-3">
             <div class="form-label">
-                {{ form_label(form.password) }}
+                {{ form_label(form.password) }} *
             </div>
             {{ form_widget(form.password) }}
+        </div>
+
+        <div class="my-3">
+            <div class="form-label">
+                {{ form_label(form.confirmPassword) }} *
+            </div>
+            {{ form_widget(form.confirmPassword) }}
+        </div>
+
+        <div class="mdp alert alert-warning">
+            <p class="m-0">* : Votre mot de passe doit contenir au moins : </p>
+            <ul>
+                <li>Une minuscule</li>
+                <li>Une majuscule</li>
+                <li>Un chiffre</li>
+                <li>Un caractère spécial</li>
+            </ul>
         </div>
 
         <div class="text-danger" style="">
