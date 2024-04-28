@@ -38,4 +38,26 @@ class ApiUser
         }
     }
 
+    public function login(string $email,string $password) : array {
+        $donnees = [
+            'email' => $email,
+            'password' => $password
+        ];
+
+        // On fais appel au endpoint 127.0.0.1:8000/api/login
+        try {
+            $responseAPI = $this->httpClient->request(
+                'POST',
+                'http://'.$_ENV["ADRESSE_IP_LOCAL"].':8000/api/login',
+                ['json' => $donnees]
+            );
+            return $responseAPI->toArray();
+
+        } catch (ClientExceptionInterface $exception) {
+            $statusCode = $exception->getResponse()->getStatusCode();
+            $messageErreur = $exception->getResponse()->getContent(false);
+            return ['erreur' => $messageErreur,'code' => $statusCode];
+        }
+    }
+
 }
