@@ -25,7 +25,10 @@
 {#                    <p><b>Nombre de place</b> : {{ seance.Salle.nbPlace}}</p>#}
 
                     {# Que si connecter #}
-                    <a href="" class="btn btn-primary">Reserver</a>
+
+                    {% if connecter == true %}
+                        <a href="" class="btn btn-primary">Reserver</a>
+                    {% endif %}
                 </div>
             {% endfor %}
 
