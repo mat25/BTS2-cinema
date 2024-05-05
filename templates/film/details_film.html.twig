@@ -24,10 +24,31 @@
 {#                    <p><b>Salle</b> : {{ seance.Salle.nomSalle}}</p>#}
 {#                    <p><b>Nombre de place</b> : {{ seance.Salle.nbPlace}}</p>#}
 
-                    {# Que si connecter #}
 
+                    {# Que si connecter #}
                     {% if connecter == true %}
-                        <a href="" class="btn btn-primary">Reserver</a>
+                        <div class="form">
+                            {{ form_start(forms[seance.id]) }}
+
+                            <div class="d-flex flex-direction-row justify-content-center align-items-center">
+                                <div class="form-label" style="margin-right: 20px; margin-bottom: 20px; align-items: center">
+                                    {{ form_label(forms[seance.id].nbPlace) }}
+                                </div>
+                                <div class="" style="width: 70px">
+                                    {{ form_widget(forms[seance.id].nbPlace) }}
+                                </div>
+                            </div>
+
+                            <div class="text-danger" style="">
+                                {{ form_errors(forms[seance.id]) }}
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Reserver</button>
+                            </div>
+
+                            {{ form_end(forms[seance.id]) }}
+                        </div>
                     {% endif %}
                 </div>
             {% endfor %}
