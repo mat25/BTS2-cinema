@@ -18,7 +18,7 @@ class ReservationFormType extends AbstractType
             ->add('idSeance', HiddenType::class, [
             ])
             ->add('nbPlace', NumberType::class, [
-                'label' => 'Nombre de place',
+                'label' => 'Nombre de places',
             ]);
     }
 
