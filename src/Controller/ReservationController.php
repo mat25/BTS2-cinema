@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\ReservationFormType;
 use App\Services\ApiReservation;
+use App\Services\ApiSeance;
 use App\Services\UserConnecter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
@@ -15,8 +16,29 @@ use Symfony\Component\Routing\Annotation\Route;
 class ReservationController extends AbstractController
 {
     #[Route('/reservation/{idSeance}', name: 'app_reservation')]
-    public function index(int $idSeance,SessionInterface $session,UserConnecter $userConnecter,Request $request, ApiReservation $apiReservation): Response
+    public function index(int $idSeance,SessionInterface $session,UserConnecter $userConnecter,Request $request, ApiReservation $apiReservation, ApiSeance $apiSeance): Response
     {
+        $erreur = "";
+        $form = "";
+        $date = "";
+        $tarif = "";
+        // Récup les infos de la séance
+        $response = $apiSeance->infoSeance($idSeance,$session->get("token"));
+
+        if (isset($response["erreur"])) {
+            $erreur =  "Erreur lors du chargement des données !";
+            goto fin;
+        }
+
+        // Définie la date
+        $dateBrut = $response["dateProjection"];
+        $dateTime = new \DateTime($dateBrut);
+        $date = $dateTime->format("d/m/Y à H\hi");
+
+        // Définie le tarif
+        $tarif = $response["tarifNormal"];
+
+        // Début du formulaire
         $form = $this->createForm(ReservationFormType::class);
 
         $form->handleRequest($request);
@@ -49,10 +71,14 @@ class ReservationController extends AbstractController
 
         }
 
+        fin:
         return $this->render('reservation/index.html.twig', [
             'controller_name' => 'ReservationController',
             'connecter' => $userConnecter->connecter($session),
-            'form' => $form
+            'form' => $form,
+            'tarif' => $tarif,
+            'date' => $date,
+            'erreur' => $erreur,
         ]);
     }
 }
